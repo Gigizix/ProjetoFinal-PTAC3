@@ -5,7 +5,7 @@ export default function Carregando(){
         <Image 
         width={100}
         height={100}
-        src='/3-dots-bounce.svg'
+        src='link da image'
         alt='Imagem carregando'/>
     )
     
