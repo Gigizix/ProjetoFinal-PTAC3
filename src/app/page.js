@@ -32,4 +32,83 @@ export default function Home() {
     setListaProdudt(newList);
   }
 
+const orderZa  = () => {
+    let newList = [...listaProduct].sort((a,b)=>
+      a.bolsa.localeCompare(b.bolsa)
+    );
+    newList = newList.reverse();
+    setListaProdudt(newList);
+  }
+
+  const ordermenor = () =>{
+    let newList = [...listaProduct].sort( (a, b) =>
+      a.preco - b.preco
+  );
+  setListaProdudt(newList);
+  }
+  
+  const ordermaior = () =>{
+    let newList = [...listaProduct].sort( (a, b) =>
+        a.preco - b.preco
+    );
+    newList = newList.reverse();
+    setListaProdudt(newList);
+  }
+
+ 
+
+  const searchText = (text) => {
+    setSearch(text);
+
+    if(text.trim()==""){
+      setListaProdudt(listaComplete);
+      return
+    }
+
+    const newList = listaProduct.filter((produtos)=>
+      produtos.bolsa.toUpperCase().trim().includes(search.toUpperCase().trim()))
+    setListaProdudt(newList);
+  }
+
+  if(errorFatch == true){
+    return <ErrorGetData/>
+  }
+
+  if (listaComplete[0]==null){
+    return <Carregando/>
+  }
+
+
+
+  return (
+    <>
+    <div>
+      <input type="text" value={search} placeholder="Pesquise o produto!" 
+      onChange={(event)=> searchText(event.target.value)}/>
+      <button onClick={orderAz}>A-Z</button>
+      <button onClick={orderZa}>Z-A</button>
+      <button onClick={ordermaior}>maior</button>
+      <button onClick={ordermenor}>menor</button>
+    </div>
+      {listaProduct.map((data) => 
+        <div key={data.id}>
+        <br />
+        <div >
+            <p>{data.bolsa}</p>
+            <div>
+                <Image
+                    width={300}
+                    height={300}
+                    src={data.img} />
+            </div>
+            <p>R${data.preco}</p>
+            <p>{data.cor}</p>
+            <p>{data.tamanho}</p>
+        </div>
+    </div>
+    )};   
+  </>
+  );
+}
+
   
